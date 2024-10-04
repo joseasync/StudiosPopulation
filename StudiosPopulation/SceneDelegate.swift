@@ -10,7 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var populationInteractor: PopulationNetworkProtocol = PopulationInteractor()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -33,7 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func createSearchNationNavigationController() -> UINavigationController {
-        let nationVC = NationViewController()
+        let nationVC = NationViewController(networkInteractor: populationInteractor)
         nationVC.title = "Nation"
         
         let image = UIImage(systemName: "globe.americas")
@@ -43,7 +43,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func createSearchStateNavigationController() -> UINavigationController {
-        let stateVC = StateViewController()
+        let stateVC = StateViewController(networkInteractor: populationInteractor)
         stateVC.title = "States"
         let image = UIImage(systemName: "map")
         stateVC.tabBarItem = UITabBarItem(title: "States", image: image, tag: 0)

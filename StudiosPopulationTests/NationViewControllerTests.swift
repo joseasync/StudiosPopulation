@@ -17,9 +17,8 @@ final class NationViewControllerTests: XCTestCase {
     
     override func setUp () {
         super.setUp()
-        sut = NationViewController()
         mockPopulationInteractor = MockPopulationInteractor()
-        sut.populationInteractor = mockPopulationInteractor
+        sut = NationViewController(networkInteractor: mockPopulationInteractor)
     }
 
     override func tearDown() {

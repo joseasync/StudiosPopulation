@@ -12,6 +12,15 @@ class StateViewController: PopulationBaseViewController {
     var selectedYear: String = "All"
     var yearsFilter: [String] = []
     
+    init(networkInteractor: PopulationNetworkProtocol) {
+        super.init(nibName: nil, bundle: nil)
+        self.populationInteractor = networkInteractor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         populationView.populationViewDelegate = self
@@ -42,6 +51,7 @@ extension StateViewController: PopulationDelegate {
     func fetchPopulation() async {
         
         do {
+            guard let populationInteractor else { return }
             let stateData: StateData = try await populationInteractor.getPopulation(dataType: .state, year: selectedYear)
             
             let populationList = stateData.data.map { statePopulation in

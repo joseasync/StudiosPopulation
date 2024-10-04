@@ -10,7 +10,7 @@ import UIKit
 class PopulationBaseViewController: UIViewController {
 
     let populationView = PopulationView()
-    var populationInteractor: PopulationNetworkProtocol = PopulationInteractor()
+    var populationInteractor: PopulationNetworkProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()

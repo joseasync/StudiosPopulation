@@ -17,9 +17,8 @@ final class StateViewControllerTests: XCTestCase {
     
     override func setUp () {
         super.setUp()
-        sut = StateViewController()
         mockPopulationInteractor = MockPopulationInteractor()
-        sut.populationInteractor = mockPopulationInteractor
+        sut = StateViewController(networkInteractor: mockPopulationInteractor)
     }
 
     override func tearDown() {

@@ -10,8 +10,9 @@ import UIKit
 @MainActor
 class NationViewController: PopulationBaseViewController {
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(networkInteractor: PopulationNetworkProtocol) {
+        super.init(nibName: nil, bundle: nil)
+        self.populationInteractor = networkInteractor
     }
     
     required init?(coder: NSCoder) {
@@ -35,6 +36,8 @@ extension NationViewController: PopulationDelegate {
     
     func fetchPopulation() async {
         do {
+            
+            guard let populationInteractor else { return }
             let nationData: NationData = try await populationInteractor.getPopulation(dataType: .nation, year: "All")
             
             let populationList = nationData.data.map { nationPopulation in
